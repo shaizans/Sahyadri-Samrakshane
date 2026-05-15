@@ -16,6 +16,7 @@ import com.sahyadri.sentinel.presentation.auth.LoginScreen
 import com.sahyadri.sentinel.presentation.auth.RegisterScreen
 import com.sahyadri.sentinel.presentation.camera.CameraScreen
 import com.sahyadri.sentinel.presentation.home.HomeScreen
+import com.sahyadri.sentinel.presentation.location.LocationPreviewScreen
 
 @Composable
 fun NavGraph(
@@ -62,6 +63,9 @@ fun NavGraph(
                 // Next phase will handle the report form with this image
                 navController.popBackStack()
             })
+        }
+        composable(route = Screen.LocationPreview.route) {
+            LocationPreviewScreen()
         }
     }
 }

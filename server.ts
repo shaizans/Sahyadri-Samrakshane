@@ -17,10 +17,10 @@ app.get("*", (req, res) => {
       <body>
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
-          <p>Phase 4: Camera Feature Complete.</p>
-          <p>Features: CameraX Integration, Runtime Permissions, Image Capture, Local Storage.</p>
-          <p>Architecture: MVVM with Hilt, Accompanist for Permissions.</p>
-          <p>Status: Camera layer ready. Next: GPS & Location tracking.</p>
+          <p>Phase 5: GPS & Location Complete.</p>
+          <p>Features: FusedLocationProviderClient, High-accuracy GPS, Google Maps Preview, Permission Handling.</p>
+          <p>Architecture: Domain-driven LocationTracker interface, Repository implementation.</p>
+          <p>Status: Location layer ready. Next: Report Submission form setup.</p>
         </div>
       </body>
     </html>

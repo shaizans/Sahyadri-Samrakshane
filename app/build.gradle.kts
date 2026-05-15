@@ -82,6 +82,10 @@ dependencies {
     // Accompanist Permissions
     implementation(libs.accompanist.permissions)
 
+    // Location & Maps
+    implementation(libs.play.services.location)
+    implementation(libs.maps.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
