@@ -1,6 +1,7 @@
 package com.sahyadri.sentinel.presentation.theme
 
 import androidx.lifecycle.ViewModel
+import com.sahyadri.sentinel.domain.theme.ThemeSettings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -8,16 +9,17 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class ThemeViewModel @Inject constructor() : ViewModel() {
-    private val _isDarkMode = MutableStateFlow<Boolean?>(null) // null means follow system
-    val isDarkMode: StateFlow<Boolean?> = _isDarkMode.asStateFlow()
+class ThemeViewModel @Inject constructor(
+    private val themeSettings: ThemeSettings
+) : ViewModel() {
+    val isDarkMode: StateFlow<Boolean?> = themeSettings.isDarkMode
 
     fun toggleDarkMode(currentSystemDark: Boolean) {
-        val current = _isDarkMode.value ?: currentSystemDark
-        _isDarkMode.value = !current
+        val current = isDarkMode.value ?: currentSystemDark
+        themeSettings.setDarkMode(!current)
     }
 
     fun setDarkMode(enabled: Boolean) {
-        _isDarkMode.value = enabled
+        themeSettings.setDarkMode(enabled)
     }
 }

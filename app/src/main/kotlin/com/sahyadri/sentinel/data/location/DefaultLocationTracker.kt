@@ -37,11 +37,30 @@ class DefaultLocationTracker @Inject constructor(
         }
 
         return suspendCancellableCoroutine { cont ->
-            locationClient.lastLocation.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    cont.resume(it.result)
+            locationClient.lastLocation.addOnCompleteListener { task ->
+                if (task.isSuccessful && task.result != null) {
+                    cont.resume(task.result)
                 } else {
-                    cont.resume(null)
+                    // Try to get a fresh location if lastLocation is null
+                    val request = com.google.android.gms.location.LocationRequest.Builder(
+                        com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY,
+                        1000
+                    ).setMaxUpdates(1).build()
+                    
+                    locationClient.requestLocationUpdates(
+                        request,
+                        object : com.google.android.gms.location.LocationCallback() {
+                            override fun onLocationResult(result: com.google.android.gms.location.LocationResult) {
+                                try {
+                                    locationClient.removeLocationUpdates(this)
+                                } catch (e: Exception) {}
+                                cont.resume(result.lastLocation)
+                            }
+                        },
+                        android.os.Looper.getMainLooper()
+                    ).addOnFailureListener {
+                        cont.resume(null)
+                    }
                 }
             }
         }

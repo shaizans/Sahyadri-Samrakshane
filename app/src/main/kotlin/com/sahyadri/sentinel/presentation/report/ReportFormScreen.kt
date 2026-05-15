@@ -1,6 +1,9 @@
 package com.sahyadri.sentinel.presentation.report
 
 import android.net.Uri
+import android.Manifest
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -25,6 +28,16 @@ fun ReportFormScreen(
 ) {
     var description by remember { mutableStateOf("") }
     val reportState by viewModel.reportState.collectAsState()
+    val context = LocalContext.current
+    
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val granted = permissions.values.all { it }
+        if (granted) {
+            viewModel.submitReport(description)
+        }
+    }
 
     LaunchedEffect(reportState) {
         if (reportState is ReportFormState.Success) {
@@ -89,7 +102,14 @@ fun ReportFormScreen(
                 CircularProgressIndicator()
             } else {
                 Button(
-                    onClick = { viewModel.submitReport(description) },
+                    onClick = { 
+                        permissionLauncher.launch(
+                            arrayOf(
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION
+                            )
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     enabled = description.isNotBlank()
                 ) {
