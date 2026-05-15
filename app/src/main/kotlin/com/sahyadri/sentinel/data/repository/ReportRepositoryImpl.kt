@@ -1,7 +1,10 @@
 package com.sahyadri.sentinel.data.repository
 
 import android.content.Context
+import android.net.Uri
 import androidx.work.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.sahyadri.sentinel.core.util.Resource
 import com.sahyadri.sentinel.data.local.dao.ReportDao
 import com.sahyadri.sentinel.data.local.entity.ReportEntity
@@ -11,10 +14,13 @@ import com.sahyadri.sentinel.domain.repository.ReportRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class ReportRepositoryImpl @Inject constructor(
     private val reportDao: ReportDao,
+    private val firestore: FirebaseFirestore,
+    private val storage: FirebaseStorage,
     @ApplicationContext private val context: Context
 ) : ReportRepository {
 
@@ -35,8 +41,36 @@ class ReportRepositoryImpl @Inject constructor(
     }
 
     override suspend fun syncReports(): Resource<Unit> {
-        // This will be expanded in Phase 8 with Firebase logic
-        return Resource.Success(Unit)
+        return try {
+            val unsyncedReports = reportDao.getUnsyncedReports()
+            unsyncedReports.forEach { reportEntity ->
+                val report = reportEntity.toReport()
+                val remoteImageUrl = if (report.imageUri.isNotEmpty() && !report.imageUri.startsWith("http")) {
+                    uploadImage(Uri.parse(report.imageUri))
+                } else {
+                    report.imageUri
+                }
+
+                val remoteReport = report.copy(imageUri = remoteImageUrl, isSynced = true)
+                
+                firestore.collection("reports")
+                    .document() // Use auto ID or hash
+                    .set(remoteReport)
+                    .await()
+
+                reportDao.updateReport(reportEntity.copy(isSynced = true, imageUri = remoteImageUrl))
+            }
+            Resource.Success(Unit)
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Sync failed")
+        }
+    }
+
+    private suspend fun uploadImage(uri: Uri): String {
+        val fileName = "reports/${System.currentTimeMillis()}.jpg"
+        val ref = storage.reference.child(fileName)
+        ref.putFile(uri).await()
+        return ref.downloadUrl.await().toString()
     }
 
     private fun scheduleSync() {

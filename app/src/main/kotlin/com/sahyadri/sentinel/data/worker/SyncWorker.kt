@@ -17,11 +17,12 @@ class SyncWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         return try {
-            // In Phase 8, we will implement the actual Firestore upload logic here.
-            // For now, we simulate a successful sync of all unsynced reports.
-            // reportRepository.syncReports()
-            
-            Result.success()
+            val result = reportRepository.syncReports()
+            if (result is Resource.Success) {
+                Result.success()
+            } else {
+                Result.retry()
+            }
         } catch (e: Exception) {
             if (runAttemptCount < 3) {
                 Result.retry()

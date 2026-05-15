@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.sahyadri.sentinel.data.local.SentinelDatabase
 import com.sahyadri.sentinel.data.local.dao.ReportDao
 import com.sahyadri.sentinel.data.location.DefaultLocationTracker
@@ -24,6 +26,14 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
 
     @Provides
     @Singleton
@@ -49,9 +59,11 @@ object AppModule {
     @Singleton
     fun provideReportRepository(
         reportDao: ReportDao,
+        firestore: FirebaseFirestore,
+        storage: FirebaseStorage,
         app: Application
     ): ReportRepository {
-        return ReportRepositoryImpl(reportDao, app)
+        return ReportRepositoryImpl(reportDao, firestore, storage, app)
     }
 
     @Provides

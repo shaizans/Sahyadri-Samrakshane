@@ -17,10 +17,10 @@ app.get("*", (req, res) => {
       <body>
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
-          <p>Phase 7: Offline Support Complete.</p>
-          <p>Features: WorkManager Sync, Local Persistence with Room, Retry Strategy, Network-aware scheduling.</p>
-          <p>Architecture: SyncWorker implementation, Application-state persistence.</p>
-          <p>Status: Offline-first flow ready. Next: Firebase Backend (Firestore & Storage).</p>
+          <p>Phase 8: Firebase Backend Complete.</p>
+          <p>Features: Firestore Data Sync, Firebase Storage Image Uploads, Automatic Background Sync.</p>
+          <p>Architecture: Online/Offline data consistency, Repository-mediated sync.</p>
+          <p>Status: Backend integration ready. Next: Alert Status Tracking UI.</p>
         </div>
       </body>
     </html>
