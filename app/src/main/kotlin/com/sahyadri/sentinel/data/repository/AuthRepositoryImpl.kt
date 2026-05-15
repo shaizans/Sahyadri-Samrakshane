@@ -87,9 +87,26 @@ class AuthRepositoryImpl @Inject constructor(
                     val firebaseUser = firebaseAuth.currentUser
                     val user = User(
                         uid = firebaseUser?.uid ?: "",
-                        email = firebaseUser?.email
+                        email = firebaseUser?.email,
+                        displayName = firebaseUser?.displayName,
+                        phoneNumber = firebaseUser?.phoneNumber
                     )
-                    trySend(Resource.Success(user))
+                    
+                    // Save/Update details in Firestore
+                    if (firebaseUser != null) {
+                        firestore.collection("users").document(firebaseUser.uid)
+                            .set(mapOf(
+                                "uid" to firebaseUser.uid,
+                                "email" to firebaseUser.email,
+                                "displayName" to firebaseUser.displayName,
+                                "phoneNumber" to firebaseUser.phoneNumber
+                            ), com.google.firebase.firestore.SetOptions.merge())
+                            .addOnCompleteListener { 
+                                trySend(Resource.Success(user))
+                            }
+                    } else {
+                        trySend(Resource.Success(user))
+                    }
                 } else {
                     trySend(Resource.Error(task.exception?.message ?: "Google Sign-In failed"))
                 }

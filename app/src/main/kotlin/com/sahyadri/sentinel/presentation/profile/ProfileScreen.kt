@@ -1,6 +1,8 @@
 package com.sahyadri.sentinel.presentation.profile
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Person
@@ -27,6 +29,7 @@ fun ProfileScreen(
     val isDarkModeManual by themeViewModel.isDarkMode.collectAsState()
     val isSystemDark = isSystemInDarkTheme()
     val isDarkMode = isDarkModeManual ?: isSystemDark
+    val scrollState = rememberScrollState()
 
     Scaffold(
         topBar = {
@@ -37,6 +40,7 @@ fun ProfileScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
+                .verticalScroll(scrollState)
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
