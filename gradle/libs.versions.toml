@@ -19,6 +19,7 @@ firebaseStorage = "20.3.0"
 camerax = "1.3.2"
 accompanist = "0.34.0"
 playServicesLocation = "21.2.0"
+playServicesAuth = "21.0.0"
 mapsCompose = "4.3.3"
 room = "2.6.1"
 work = "2.9.0"
@@ -62,6 +63,7 @@ accompanist-permissions = { group = "com.google.accompanist", name = "accompanis
 
 # Location & Maps
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
 maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "mapsCompose" }
 
 # Room

@@ -1,6 +1,7 @@
 package com.sahyadri.sentinel.data.repository
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.sahyadri.sentinel.core.util.Resource
 import com.sahyadri.sentinel.domain.model.User
 import com.sahyadri.sentinel.domain.repository.AuthRepository
@@ -45,6 +46,25 @@ class AuthRepositoryImpl @Inject constructor(
                     trySend(Resource.Success(user))
                 } else {
                     trySend(Resource.Error(task.exception?.message ?: "Registration failed"))
+                }
+            }
+        awaitClose { }
+    }
+
+    override fun googleSignIn(idToken: String): Flow<Resource<User>> = callbackFlow {
+        trySend(Resource.Loading())
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val firebaseUser = firebaseAuth.currentUser
+                    val user = User(
+                        uid = firebaseUser?.uid ?: "",
+                        email = firebaseUser?.email
+                    )
+                    trySend(Resource.Success(user))
+                } else {
+                    trySend(Resource.Error(task.exception?.message ?: "Google Sign-In failed"))
                 }
             }
         awaitClose { }

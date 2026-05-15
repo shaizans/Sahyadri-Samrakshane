@@ -55,6 +55,22 @@ class AuthViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    fun googleSignIn(idToken: String) {
+        authRepository.googleSignIn(idToken).onEach { result ->
+            when (result) {
+                is Resource.Loading -> _authState.value = AuthState.Loading
+                is Resource.Success -> {
+                    result.data?.let {
+                        _authState.value = AuthState.Success(it)
+                    }
+                }
+                is Resource.Error -> {
+                    _authState.value = AuthState.Error(result.message ?: "An unexpected error occurred")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
     fun isUserLoggedIn() = authRepository.isUserLoggedIn()
 
     fun logout() {
