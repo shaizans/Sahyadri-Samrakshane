@@ -18,7 +18,7 @@ app.get("*", (req, res) => {
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
           <p>Project Complete: 10 Phases of Development.</p>
-          <p>Features: Auth, CameraX, GPS, Offline Room Sync, Firebase, Status Tracking, Material 3.</p>
+          <p>Features: Auth, CameraX, GPS, Offline Room Sync, Firebase, Status Tracking, Material 3, Vector App Icon.</p>
           <p>Documentation: README.md updated with full architecture and setup guide.</p>
           <p>App Status: Production Ready.</p>
         </div>
