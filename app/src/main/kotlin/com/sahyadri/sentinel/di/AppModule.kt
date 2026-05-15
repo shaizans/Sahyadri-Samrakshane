@@ -11,8 +11,10 @@ import com.sahyadri.sentinel.data.local.SentinelDatabase
 import com.sahyadri.sentinel.data.local.dao.ReportDao
 import com.sahyadri.sentinel.data.location.DefaultLocationTracker
 import com.sahyadri.sentinel.data.repository.AuthRepositoryImpl
+import com.sahyadri.sentinel.data.repository.ReportRepositoryImpl
 import com.sahyadri.sentinel.domain.location.LocationTracker
 import com.sahyadri.sentinel.domain.repository.AuthRepository
+import com.sahyadri.sentinel.domain.repository.ReportRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
