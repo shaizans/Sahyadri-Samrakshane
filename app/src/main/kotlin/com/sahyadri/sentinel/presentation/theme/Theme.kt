@@ -8,13 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
-    primary = LeafGreen,
-    secondary = SkyBlue,
-    tertiary = EarthBrown,
+    primary = ForestGreen,
+    secondary = EarthBrown,
+    tertiary = LeafGreen,
     background = Color(0xFF1B1B1B),
     surface = Color(0xFF2C2C2C),
-    onPrimary = Color.Black,
-    onSecondary = Color.Black,
+    onPrimary = Color.White,
+    onSecondary = Color.White,
     onTertiary = Color.White,
     onBackground = Color.White,
     onSurface = Color.White,
@@ -24,7 +24,7 @@ private val LightColorScheme = lightColorScheme(
     primary = ForestGreen,
     secondary = EarthBrown,
     tertiary = LeafGreen,
-    background = SoftTan,
+    background = Color(0xFFF1F8E9), // Light forest mint
     surface = Color.White,
     onPrimary = Color.White,
     onSecondary = Color.White,

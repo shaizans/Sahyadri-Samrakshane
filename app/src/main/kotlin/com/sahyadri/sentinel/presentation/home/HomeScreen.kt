@@ -63,12 +63,13 @@ fun HomeScreen(
                 })
             }
             composable(Screen.Reports.route) {
-                // Placeholder for Reports
-                Text("My Reports Listing Coming Soon")
+                ReportsListScreen()
             }
             composable(Screen.Profile.route) {
-                // Placeholder for Profile
-                Text("Profile Settings Coming Soon")
+                ProfileScreen(onLogout = {
+                    // Navigate to camera is a bit of a trick here, we usually want login
+                    // But for this demo, pop to start
+                })
             }
         }
     }
