@@ -3,7 +3,7 @@ package com.sahyadri.sentinel.presentation.camera
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Camera
+import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -89,7 +89,7 @@ fun CameraScreen(
                         onClick = { viewModel.captureImage(imageCapture, context) },
                         containerColor = MaterialTheme.colorScheme.primary
                     ) {
-                        Icon(Icons.Default.Camera, contentDescription = "Capture")
+                        Icon(Icons.Default.PhotoCamera, contentDescription = "Capture")
                     }
                 }
             }
