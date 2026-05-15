@@ -39,8 +39,8 @@ class AuthViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun register(email: String, password: String) {
-        authRepository.register(email, password).onEach { result ->
+    fun register(email: String, password: String, displayName: String, phoneNumber: String) {
+        authRepository.register(email, password, displayName, phoneNumber).onEach { result ->
             when (result) {
                 is Resource.Loading -> _authState.value = AuthState.Loading
                 is Resource.Success -> {

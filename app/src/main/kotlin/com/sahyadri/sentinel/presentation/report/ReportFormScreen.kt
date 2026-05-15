@@ -2,6 +2,10 @@ package com.sahyadri.sentinel.presentation.report
 
 import android.net.Uri
 import android.Manifest
+import android.location.LocationManager
+import android.content.Context
+import android.content.Intent
+import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
@@ -30,12 +34,23 @@ fun ReportFormScreen(
     val reportState by viewModel.reportState.collectAsState()
     val context = LocalContext.current
     
+    fun checkLocationEnabled(): Boolean {
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
         val granted = permissions.values.all { it }
         if (granted) {
-            viewModel.submitReport(description)
+            if (checkLocationEnabled()) {
+                viewModel.submitReport(description)
+            } else {
+                // Prompt to turn on location
+                context.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            }
         }
     }
 

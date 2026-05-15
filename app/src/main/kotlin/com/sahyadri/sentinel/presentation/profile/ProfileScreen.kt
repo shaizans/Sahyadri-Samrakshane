@@ -50,9 +50,17 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(16.dp))
             
             Text(
-                text = user?.email ?: "Anonymous Sentinel",
+                text = user?.displayName ?: user?.email ?: "Anonymous Sentinel",
                 style = MaterialTheme.typography.headlineSmall
             )
+            
+            if (user?.phoneNumber != null) {
+                Text(
+                    text = user.phoneNumber,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.secondary
+                )
+            }
             
             Text(
                 text = "ID: ${user?.uid?.take(8)}...",

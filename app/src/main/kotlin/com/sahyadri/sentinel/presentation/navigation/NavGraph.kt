@@ -56,6 +56,11 @@ fun NavGraph(
             HomeScreen(
                 onNavigateToCamera = { categoryId ->
                     navController.navigate(Screen.Camera.route + "?categoryId=$categoryId")
+                },
+                onLogout = {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.Home.route) { inclusive = true }
+                    }
                 }
             )
         }

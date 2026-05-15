@@ -21,7 +21,8 @@ import com.sahyadri.sentinel.presentation.profile.ProfileScreen
 
 @Composable
 fun HomeScreen(
-    onNavigateToCamera: (String) -> Unit
+    onNavigateToCamera: (String) -> Unit,
+    onLogout: () -> Unit
 ) {
     val navController = rememberNavController()
     val items = listOf(
@@ -68,10 +69,7 @@ fun HomeScreen(
                 ReportsListScreen()
             }
             composable(Screen.Profile.route) {
-                ProfileScreen(onLogout = {
-                    // Navigate to camera is a bit of a trick here, we usually want login
-                    // But for this demo, pop to start
-                })
+                ProfileScreen(onLogout = onLogout)
             }
         }
     }
