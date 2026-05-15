@@ -17,10 +17,10 @@ app.get("*", (req, res) => {
       <body>
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
-          <p>Phase 5: GPS & Location Complete.</p>
-          <p>Features: FusedLocationProviderClient, High-accuracy GPS, Google Maps Preview, Permission Handling.</p>
-          <p>Architecture: Domain-driven LocationTracker interface, Repository implementation.</p>
-          <p>Status: Location layer ready. Next: Report Submission form setup.</p>
+          <p>Phase 6: Report Submission Complete.</p>
+          <p>Features: Report Form UI, Room DB Integration, Alert Type Selection, Local Persistence.</p>
+          <p>Architecture: Offline-first storage strategy, MVVM Form validation.</p>
+          <p>Status: Local submission flow ready. Next: Enhanced Offline Support (Sync Logic).</p>
         </div>
       </body>
     </html>

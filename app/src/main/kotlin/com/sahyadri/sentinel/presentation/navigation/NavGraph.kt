@@ -17,6 +17,7 @@ import com.sahyadri.sentinel.presentation.auth.RegisterScreen
 import com.sahyadri.sentinel.presentation.camera.CameraScreen
 import com.sahyadri.sentinel.presentation.home.HomeScreen
 import com.sahyadri.sentinel.presentation.location.LocationPreviewScreen
+import com.sahyadri.sentinel.presentation.report.ReportFormScreen
 
 @Composable
 fun NavGraph(
@@ -58,11 +59,26 @@ fun NavGraph(
                 }
             )
         }
-        composable(route = Screen.Camera.route + "?categoryId={categoryId}") {
+        composable(route = Screen.Camera.route + "?categoryId={categoryId}") { backStackEntry ->
+            val categoryId = backStackEntry.arguments?.getString("categoryId") ?: "General"
             CameraScreen(onImageCaptured = { uri ->
-                // Next phase will handle the report form with this image
-                navController.popBackStack()
+                val encodedUri = java.net.URLEncoder.encode(uri.toString(), "UTF-8")
+                navController.navigate(Screen.ReportForm.route + "/$categoryId/$encodedUri")
             })
+        }
+        composable(route = Screen.ReportForm.route + "/{categoryId}/{imageUri}") { backStackEntry ->
+            val categoryId = backStackEntry.arguments?.getString("categoryId") ?: "General"
+            val imageUriStr = backStackEntry.arguments?.getString("imageUri") ?: ""
+            ReportFormScreen(
+                imageUri = android.net.Uri.parse(imageUriStr),
+                categoryId = categoryId,
+                onSuccess = {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Home.route) { inclusive = true }
+                    }
+                },
+                onCancel = { navController.popBackStack() }
+            )
         }
         composable(route = Screen.LocationPreview.route) {
             LocationPreviewScreen()
