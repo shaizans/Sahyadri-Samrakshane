@@ -17,8 +17,9 @@ app.get("*", (req, res) => {
       <body>
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
-          <p>Phase 10: Final Polish Complete.</p>
-          <p>Highlights: Forest Branding UI, Profile Management, Offline-First Architecture, GPS Integration.</p>
+          <p>Project Complete: 10 Phases of Development.</p>
+          <p>Features: Auth, CameraX, GPS, Offline Room Sync, Firebase, Status Tracking, Material 3.</p>
+          <p>Documentation: README.md updated with full architecture and setup guide.</p>
           <p>App Status: Production Ready.</p>
         </div>
       </body>

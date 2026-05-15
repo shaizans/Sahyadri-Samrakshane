@@ -1,6 +1,11 @@
 {
   "name": "Sahyadri-Samrakshane",
   "description": "Forest Sentinel: An environmental protection and ecological alert Android application.",
-  "requestFramePermissions": [],
-  "majorCapabilities": []
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
