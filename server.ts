@@ -17,10 +17,10 @@ app.get("*", (req, res) => {
       <body>
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
-          <p>Phase 2: Authentication Complete.</p>
-          <p>Features: Firebase Auth, Login/Register UI, Flow-based State Management.</p>
-          <p>Architecture: MVVM + Clean Architecture implementation started.</p>
-          <p>Status: Auth layer ready. Export project to use in Android Studio.</p>
+          <p>Phase 3: Home Dashboard Complete.</p>
+          <p>Features: Bottom Navigation, Alert Categories, Material 3 Design.</p>
+          <p>Architecture: Component-based Compose architecture.</p>
+          <p>Status: UI Foundation ready. Next: CameraX integration.</p>
         </div>
       </body>
     </html>

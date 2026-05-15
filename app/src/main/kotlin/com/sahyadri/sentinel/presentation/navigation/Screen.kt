@@ -6,4 +6,9 @@ sealed class Screen(val route: String) {
     object Register : Screen("register_screen")
     object Camera : Screen("camera_screen")
     object ReportDetails : Screen("report_details_screen")
+    
+    // Bottom Nav Screens
+    object Dash : Screen("dash_screen")
+    object Reports : Screen("reports_screen")
+    object Profile : Screen("profile_screen")
 }

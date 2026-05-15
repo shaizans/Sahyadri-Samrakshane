@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.sahyadri.sentinel.presentation.auth.AuthViewModel
 import com.sahyadri.sentinel.presentation.auth.LoginScreen
 import com.sahyadri.sentinel.presentation.auth.RegisterScreen
+import com.sahyadri.sentinel.presentation.home.HomeScreen
 
 @Composable
 fun NavGraph(
@@ -51,12 +52,5 @@ fun NavGraph(
         composable(route = Screen.Home.route) {
             HomeScreen()
         }
-    }
-}
-
-@Composable
-fun HomeScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Sahyadri-Samrakshane: Forest Sentinel Placeholder")
     }
 }
