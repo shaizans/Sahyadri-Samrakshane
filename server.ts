@@ -17,10 +17,10 @@ app.get("*", (req, res) => {
       <body>
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
-          <p>Phase 6: Report Submission Complete.</p>
-          <p>Features: Report Form UI, Room DB Integration, Alert Type Selection, Local Persistence.</p>
-          <p>Architecture: Offline-first storage strategy, MVVM Form validation.</p>
-          <p>Status: Local submission flow ready. Next: Enhanced Offline Support (Sync Logic).</p>
+          <p>Phase 7: Offline Support Complete.</p>
+          <p>Features: WorkManager Sync, Local Persistence with Room, Retry Strategy, Network-aware scheduling.</p>
+          <p>Architecture: SyncWorker implementation, Application-state persistence.</p>
+          <p>Status: Offline-first flow ready. Next: Firebase Backend (Firestore & Storage).</p>
         </div>
       </body>
     </html>

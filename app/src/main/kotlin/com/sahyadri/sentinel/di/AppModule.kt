@@ -47,8 +47,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideReportRepository(reportDao: ReportDao): ReportRepository {
-        return ReportRepositoryImpl(reportDao)
+    fun provideReportRepository(
+        reportDao: ReportDao,
+        app: Application
+    ): ReportRepository {
+        return ReportRepositoryImpl(reportDao, app)
     }
 
     @Provides

@@ -91,6 +91,11 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     kapt(libs.androidx.room.compiler)
 
+    // WorkManager
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.hilt.work)
+    kapt(libs.androidx.hilt.compiler)
+
     // Image Loading
     implementation("io.coil-kt:coil-compose:2.6.0")
 
