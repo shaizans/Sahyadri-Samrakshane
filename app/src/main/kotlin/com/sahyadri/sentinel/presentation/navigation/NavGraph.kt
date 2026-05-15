@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.sahyadri.sentinel.presentation.auth.AuthViewModel
 import com.sahyadri.sentinel.presentation.auth.LoginScreen
 import com.sahyadri.sentinel.presentation.auth.RegisterScreen
+import com.sahyadri.sentinel.presentation.camera.CameraScreen
 import com.sahyadri.sentinel.presentation.home.HomeScreen
 
 @Composable
@@ -50,7 +51,17 @@ fun NavGraph(
             )
         }
         composable(route = Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(
+                onNavigateToCamera = { categoryId ->
+                    navController.navigate(Screen.Camera.route + "?categoryId=$categoryId")
+                }
+            )
+        }
+        composable(route = Screen.Camera.route + "?categoryId={categoryId}") {
+            CameraScreen(onImageCaptured = { uri ->
+                // Next phase will handle the report form with this image
+                navController.popBackStack()
+            })
         }
     }
 }

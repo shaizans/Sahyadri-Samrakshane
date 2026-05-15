@@ -17,10 +17,10 @@ app.get("*", (req, res) => {
       <body>
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
-          <p>Phase 3: Home Dashboard Complete.</p>
-          <p>Features: Bottom Navigation, Alert Categories, Material 3 Design.</p>
-          <p>Architecture: Component-based Compose architecture.</p>
-          <p>Status: UI Foundation ready. Next: CameraX integration.</p>
+          <p>Phase 4: Camera Feature Complete.</p>
+          <p>Features: CameraX Integration, Runtime Permissions, Image Capture, Local Storage.</p>
+          <p>Architecture: MVVM with Hilt, Accompanist for Permissions.</p>
+          <p>Status: Camera layer ready. Next: GPS & Location tracking.</p>
         </div>
       </body>
     </html>

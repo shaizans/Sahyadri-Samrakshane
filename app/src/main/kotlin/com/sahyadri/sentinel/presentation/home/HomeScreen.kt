@@ -18,7 +18,9 @@ import androidx.navigation.compose.rememberNavController
 import com.sahyadri.sentinel.presentation.navigation.Screen
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    onNavigateToCamera: (String) -> Unit
+) {
     val navController = rememberNavController()
     val items = listOf(
         BottomNavItem("Dashboard", Screen.Dash.route, Icons.Default.Dashboard),
@@ -56,7 +58,9 @@ fun HomeScreen() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Dash.route) {
-                DashboardScreen(onCategoryClick = { /* Handle navigation to report form */ })
+                DashboardScreen(onCategoryClick = { category -> 
+                    onNavigateToCamera(category.id)
+                })
             }
             composable(Screen.Reports.route) {
                 // Placeholder for Reports
