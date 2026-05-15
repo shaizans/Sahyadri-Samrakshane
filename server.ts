@@ -17,9 +17,10 @@ app.get("*", (req, res) => {
       <body>
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
-          <p>Phase 1: Project Setup Complete.</p>
-          <p>Architecture: Clean Architecture + Hilt + Jetpack Compose</p>
-          <p>Status: Initial codebase generated. Export project to use in Android Studio.</p>
+          <p>Phase 2: Authentication Complete.</p>
+          <p>Features: Firebase Auth, Login/Register UI, Flow-based State Management.</p>
+          <p>Architecture: MVVM + Clean Architecture implementation started.</p>
+          <p>Status: Auth layer ready. Export project to use in Android Studio.</p>
         </div>
       </body>
     </html>
