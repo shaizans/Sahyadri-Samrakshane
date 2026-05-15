@@ -7,6 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.sahyadri.sentinel.presentation.theme.ThemeViewModel
 import com.sahyadri.sentinel.presentation.navigation.NavGraph
 import com.sahyadri.sentinel.presentation.theme.SahyadriTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +21,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SahyadriTheme {
+            val themeViewModel: ThemeViewModel = viewModel()
+            val isDarkModeManual by themeViewModel.isDarkMode.collectAsState()
+            val isDarkMode = isDarkModeManual ?: isSystemInDarkTheme()
+
+            SahyadriTheme(darkTheme = isDarkMode) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

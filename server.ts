@@ -17,9 +17,9 @@ app.get("*", (req, res) => {
       <body>
         <div class="container">
           <h1>Sahyadri-Samrakshane (Forest Sentinel)</h1>
-          <p>Project Complete: 10 Phases of Development.</p>
-          <p>Features: Auth, CameraX, GPS, Offline Room Sync, Firebase, Status Tracking, Material 3, Vector App Icon.</p>
-          <p>Documentation: README.md updated with full architecture and setup guide.</p>
+          <p>Phase 11: Dark Mode Support Complete.</p>
+          <p>Features: Manual Dark Mode Toggle, Custom Theme Persistence, Material 3 Dark/Light Schemes.</p>
+          <p>Architecture: ThemeViewModel for global theme management.</p>
           <p>App Status: Production Ready.</p>
         </div>
       </body>

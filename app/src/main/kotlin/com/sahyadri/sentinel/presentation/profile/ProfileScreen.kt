@@ -9,16 +9,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sahyadri.sentinel.presentation.auth.AuthViewModel
+import com.sahyadri.sentinel.presentation.theme.ThemeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     onLogout: () -> Unit,
-    viewModel: AuthViewModel = hiltViewModel()
+    viewModel: AuthViewModel = hiltViewModel(),
+    themeViewModel: ThemeViewModel = hiltViewModel()
 ) {
     val user = viewModel.currentUser
+    val isDarkModeManual by themeViewModel.isDarkMode.collectAsState()
+    val isSystemDark = isSystemInDarkTheme()
+    val isDarkMode = isDarkModeManual ?: isSystemDark
 
     Scaffold(
         topBar = {
@@ -51,6 +59,32 @@ fun ProfileScreen(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.secondary
             )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "Dark Mode",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Switch(
+                        checked = isDarkMode,
+                        onCheckedChange = { themeViewModel.setDarkMode(it) }
+                    )
+                }
+            }
             
             Spacer(modifier = Modifier.weight(1f))
             
