@@ -15,6 +15,7 @@ import com.sahyadri.sentinel.presentation.home.components.CategoryCard
 import com.sahyadri.sentinel.presentation.theme.ForestGreen
 import com.sahyadri.sentinel.presentation.theme.WarningRed
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
     onCategoryClick: (AlertCategory) -> Unit

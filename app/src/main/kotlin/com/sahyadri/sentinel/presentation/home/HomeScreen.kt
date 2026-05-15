@@ -16,6 +16,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sahyadri.sentinel.presentation.navigation.Screen
+import com.sahyadri.sentinel.presentation.report.ReportsListScreen
+import com.sahyadri.sentinel.presentation.profile.ProfileScreen
 
 @Composable
 fun HomeScreen(
